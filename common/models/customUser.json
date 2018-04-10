@@ -1,0 +1,40 @@
+{
+  "name": "CustomUser",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "lastName": {
+      "type": "string",
+      "required": true
+    },
+    "gender": {
+      "type": "string",
+      "required": true
+    },
+    "age": {
+      "type": "date",
+      "default": "$now",
+      "required": true
+    },
+    "registrationDate": {
+      "type": "date",
+      "default": "$now",
+      "required": true
+    },
+    "balance": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
