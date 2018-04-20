@@ -6,35 +6,53 @@
     "validateUpsert": true
   },
   "properties": {
-    "firstName": {
+    "email": {
       "type": "string",
       "required": true
     },
-    "lastName": {
+    "password": {
       "type": "string",
-      "required": true
-    },
-    "gender": {
-      "type": "string",
-      "required": true
-    },
-    "age": {
-      "type": "date",
-      "default": "$now",
       "required": true
     },
     "registrationDate": {
       "type": "date",
-      "default": "$now",
-      "required": true
+      "required": true,
+      "default": "$now"
     },
-    "balance": {
-      "type": "number",
-      "required": true
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "gender": {
+      "type": "string"
+    },
+    "age": {
+      "type": "string"
     }
   },
   "validations": [],
-  "relations": {},
-  "acls": [],
+  "relations": {
+    "subscription": {
+      "type": "hasOne",
+      "model": "Subscription",
+      "foreignKey": "userId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    }
+  ],
   "methods": {}
 }

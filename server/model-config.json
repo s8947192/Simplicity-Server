@@ -39,5 +39,13 @@
   "CustomUser": {
     "dataSource": "db",
     "public": true
+  },
+  "Subscription": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Membership": {
+    "dataSource": "db",
+    "public": true
   }
 }
