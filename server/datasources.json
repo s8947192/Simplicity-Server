@@ -4,7 +4,7 @@
     "port": 27017,
     "url": "mongodb+srv://frostberry:Ro7iIiNBuOxwQhw7@simplicity-dcaib.mongodb.net/test",
     "database": "test",
-    "password": "Ro7iIiNBuOxwQhw7",
+    "password": "Delisian1",
     "name": "db",
     "user": "frostberry",
     "connector": "mongodb"

@@ -1,20 +1,16 @@
 {
-  "name": "Membership",
-  "plural": "membership",
+  "name": "UserLanguage",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "price": {
-      "type": "number",
+    "languageId": {
+      "type": "string",
       "required": true
     },
-    "students": {
-      "type": "number"
-    },
-    "title": {
+    "userId": {
       "type": "string",
       "required": true
     }

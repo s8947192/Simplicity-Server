@@ -1,5 +1,5 @@
 {
-  "name": "Subscription",
+  "name": "Language",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -9,17 +9,16 @@
     "title": {
       "type": "string",
       "required": true
-    },
-    "price": {
-      "type": "string",
-      "required": true
-    },
-    "max_clients": {
-      "type": "number"
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "userLanguages": {
+      "type": "hasMany",
+      "model": "UserLanguage",
+      "foreignKey": "languageId"
+    }
+  },
   "acls": [],
   "methods": {}
 }

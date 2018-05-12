@@ -40,11 +40,19 @@
     "dataSource": "db",
     "public": true
   },
+  "Language": {
+    "dataSource": "db",
+    "public": true
+  },
+  "UserLanguage": {
+    "dataSource": "db",
+    "public": true
+  },
   "Subscription": {
     "dataSource": "db",
     "public": true
   },
-  "Membership": {
+  "UserSubscription": {
     "dataSource": "db",
     "public": true
   }

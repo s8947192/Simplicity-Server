@@ -24,19 +24,18 @@
     },
     "lastName": {
       "type": "string"
-    },
-    "gender": {
-      "type": "string"
-    },
-    "age": {
-      "type": "string"
     }
   },
   "validations": [],
   "relations": {
-    "subscription": {
+    "userLanguages": {
       "type": "hasOne",
-      "model": "Subscription",
+      "model": "UserLanguage",
+      "foreignKey": "userId"
+    },
+    "userSubscriptions": {
+      "type": "hasMany",
+      "model": "UserSubscription",
       "foreignKey": "userId"
     }
   },
