@@ -1,21 +1,26 @@
 {
-  "name": "Language",
+  "name": "UserSubscriptions",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "title": {
+    "date": {
       "type": "string",
       "required": true
     }
   },
   "validations": [],
   "relations": {
-    "customUsers": {
-      "type": "hasMany",
+    "customUser": {
+      "type": "belongsTo",
       "model": "CustomUser",
+      "foreignKey": ""
+    },
+    "subscription": {
+      "type": "belongsTo",
+      "model": "Subscription",
       "foreignKey": ""
     }
   },

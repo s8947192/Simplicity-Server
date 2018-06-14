@@ -19,7 +19,14 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "customUsers": {
+      "type": "hasMany",
+      "model": "CustomUser",
+      "foreignKey": "",
+      "through": "UserSubscriptions"
+    }
+  },
   "acls": [],
   "methods": {}
 }

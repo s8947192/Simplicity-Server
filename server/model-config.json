@@ -44,15 +44,11 @@
     "dataSource": "db",
     "public": true
   },
-  "UserLanguage": {
-    "dataSource": "db",
-    "public": true
-  },
   "Subscription": {
     "dataSource": "db",
     "public": true
   },
-  "UserSubscription": {
+  "UserSubscriptions": {
     "dataSource": "db",
     "public": true
   }

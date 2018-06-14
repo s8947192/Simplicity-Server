@@ -28,15 +28,22 @@
   },
   "validations": [],
   "relations": {
-    "userLanguages": {
-      "type": "hasOne",
-      "model": "UserLanguage",
-      "foreignKey": "userId"
+    "language": {
+      "type": "belongsTo",
+      "model": "Language",
+      "foreignKey": ""
     },
-    "userSubscriptions": {
+    "subscriptions": {
       "type": "hasMany",
-      "model": "UserSubscription",
-      "foreignKey": "userId"
+      "model": "Subscription",
+      "foreignKey": "",
+      "through": "UserSubscriptions"
+    },
+    "paymentSources": {
+      "type": "hasMany",
+      "model": "PaymentSource",
+      "foreignKey": "",
+      "through": "UserPaymentSources"
     }
   },
   "acls": [
