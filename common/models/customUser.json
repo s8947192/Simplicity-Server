@@ -42,8 +42,12 @@
     "paymentSources": {
       "type": "hasMany",
       "model": "PaymentSource",
-      "foreignKey": "",
-      "through": "UserPaymentSources"
+      "foreignKey": ""
+    },
+    "currency": {
+      "type": "belongsTo",
+      "model": "Currency",
+      "foreignKey": ""
     }
   },
   "acls": [

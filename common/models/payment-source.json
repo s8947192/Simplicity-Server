@@ -1,0 +1,32 @@
+{
+  "name": "PaymentSource",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "cardNumber": {
+      "type": "number",
+      "required": true
+    },
+    "expirationDate": {
+      "type": "date",
+      "required": true
+    },
+    "cvc": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "customUser": {
+      "type": "belongsTo",
+      "model": "CustomUser",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
