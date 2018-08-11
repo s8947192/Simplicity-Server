@@ -14,50 +14,54 @@
     ]
   },
   "User": {
-    "dataSource": "db",
+    "dataSource": "MongoDB",
     "public": false
   },
   "AccessToken": {
-    "dataSource": "db",
+    "dataSource": "MongoDB",
     "public": false
   },
   "ACL": {
-    "dataSource": "db",
+    "dataSource": "MongoDB",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "db",
+    "dataSource": "MongoDB",
     "public": false,
     "options": {
       "strictObjectIDCoercion": true
     }
   },
   "Role": {
-    "dataSource": "db",
+    "dataSource": "MongoDB",
     "public": false
   },
   "CustomUser": {
-    "dataSource": "db",
+    "dataSource": "MongoDB",
     "public": true
   },
   "Language": {
-    "dataSource": "db",
+    "dataSource": "MongoDB",
     "public": true
   },
   "Subscription": {
-    "dataSource": "db",
+    "dataSource": "MongoDB",
     "public": true
   },
   "UserSubscriptions": {
-    "dataSource": "db",
+    "dataSource": "MongoDB",
     "public": true
   },
   "PaymentSource": {
-    "dataSource": "db",
+    "dataSource": "MongoDB",
     "public": true
   },
   "Currency": {
-    "dataSource": "db",
+    "dataSource": "MongoDB",
+    "public": true
+  },
+  "StripeService": {
+    "dataSource": "StripeService",
     "public": true
   }
 }

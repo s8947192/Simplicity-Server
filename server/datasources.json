@@ -1,12 +1,16 @@
 {
-  "db": {
+  "MongoDB": {
     "host": "cloud.mongodb.com",
     "port": 27017,
     "url": "mongodb+srv://frostberry:Ro7iIiNBuOxwQhw7@simplicity-dcaib.mongodb.net/test",
     "database": "test",
     "password": "Delisian1",
-    "name": "db",
+    "name": "MongoDB",
     "user": "frostberry",
     "connector": "mongodb"
+  },
+  "StripeService": {
+    "name": "StripeService",
+    "connector": "rest"
   }
 }
