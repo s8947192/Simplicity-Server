@@ -1,37 +1,19 @@
 const app = require('../../server/server')
 
-const stripeClient = require('stripe')('pk_test_U5zfDnUYzX2WoMAMA8BEqNM9')
-const stripe = require('stripe')('sk_test_YVNd7kHmQsZv3jrQYNlQPIQV')
-
 module.exports = function(CustomUser) {
 
   CustomUser.observe('before save', async function(ctx) {
-
-    const {
-      StripeService
-    } = app.models
-
+    const { StripeService } = app.models
     const {
       email,
       username,
-      pricing_plan
+      pricing_plan,
+      token
     } = ctx.instance
-
-    const token = await stripeClient.tokens.create({
-      card: {
-        number: '4000000000000077',
-        exp_month: 12,
-        exp_year: 2019,
-        cvc: '123',
-        name: 'USER 1'
-      },
-      email: email
-    })
 
     let newCustomer = null
 
     try {
-
       console.log('checking email...')
       const takenEmail = await CustomUser.findOne({ where: { email } })
       if (takenEmail) throw Error(`email ${email} has already been taken`)
@@ -47,11 +29,13 @@ module.exports = function(CustomUser) {
       console.log('creating new customer...')
       newCustomer = await StripeService.createCustomer(email)
 
-      console.log('adding payment source...')
-      const paymentSource = await StripeService.createSource(newCustomer.id, token.id)
+      if (token) {
+        console.log('adding payment source...')
+        const paymentSource = await StripeService.createSource(newCustomer.id, token)
 
-      console.log('setting default payment source...')
-      await StripeService.setDefaultSource(newCustomer.id, paymentSource.id)
+        console.log('setting default payment source...')
+        await StripeService.setDefaultSource(newCustomer.id, paymentSource.id)
+      }
 
       console.log('subscripbing...')
       await StripeService.subscribe(newCustomer.id, pricing_plan)
@@ -62,7 +46,11 @@ module.exports = function(CustomUser) {
     } catch (err) {
       console.log('cancelling registration...')
       if (newCustomer) await StripeService.deleteCustomer(newCustomer.id)
-      return Promise.reject(err.message)
+      return Promise.reject(err)
     }
+  })
+
+  CustomUser.observe('after save', async function(ctx) {
+    console.log('registration completed...')
   })
 }

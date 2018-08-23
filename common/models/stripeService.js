@@ -4,11 +4,14 @@ const stripe = require('stripe')('sk_test_YVNd7kHmQsZv3jrQYNlQPIQV')
 
 module.exports = function(StripeService) {
 
-  StripeService.getSubscriptions = () =>
-    stripe.subscriptions.list()
+  StripeService.getProducts = () =>
+    stripe.products.list({ type: 'service' }).then(products => products.data)
 
   StripeService.getPlans = () =>
-    stripe.plans.list()
+    stripe.plans.list({ limit: 100 }).then(plans => plans.data)
+
+  StripeService.getSubscriptions = () =>
+    stripe.subscriptions.list()
 
   StripeService.getCoupons = () =>
     stripe.coupons.list()
@@ -32,6 +35,15 @@ module.exports = function(StripeService) {
   StripeService.subscribe = (customer, plan, coupon) =>
     stripe.subscriptions.create({ customer, coupon, items: [{ plan: plan }] })
 
+  StripeService.remoteMethod('getProducts', {
+    http: { verb: 'get' },
+    returns: { arg: 'products', type: 'object' }
+  })
+
+  StripeService.remoteMethod('getPlans', {
+    http: { verb: 'get' },
+    returns: { arg: 'plans', type: 'object' }
+  })
 }
 
 // const stripeClient = require('stripe')('pk_test_U5zfDnUYzX2WoMAMA8BEqNM9')
@@ -71,8 +83,3 @@ module.exports = function(StripeService) {
 //   })
 //   return 'DONE'
 // }
-
-// StripeService.remoteMethod('createCustomer', {
-//   accepts: { arg: 'email', type: 'string' },
-//   returns: { arg: 'customer', type: 'string' }
-// })
