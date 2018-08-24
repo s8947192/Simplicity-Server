@@ -14,43 +14,43 @@ module.exports = function(CustomUser) {
     let newCustomer = null
 
     try {
-      console.log('checking email...')
+      app.io.emit('registration', 'validating email')
       const takenEmail = await CustomUser.findOne({ where: { email } })
       if (takenEmail) throw Error(`email ${email} has already been taken`)
 
-      console.log('checking username...')
+      app.io.emit('registration', 'validating username')
       const takenUsername = await CustomUser.findOne({ where: { username } })
       if (takenUsername) throw Error(`username ${username} has already been taken`)
 
-      console.log('checking customer...')
+      app.io.emit('registration', 'validating customer')
       const existedCustomer = await StripeService.getCustomerByEmail(email)
       if (existedCustomer) throw Error(`customer ${email} has already been registered`)
 
-      console.log('creating new customer...')
+      app.io.emit('registration', 'creating new customer')
       newCustomer = await StripeService.createCustomer(email)
 
       if (token) {
-        console.log('adding payment source...')
+        app.io.emit('registration', 'saving payment source')
         const paymentSource = await StripeService.createSource(newCustomer.id, token)
 
-        console.log('setting default payment source...')
+        app.io.emit('registration', 'settings default payment source')
         await StripeService.setDefaultSource(newCustomer.id, paymentSource.id)
       }
 
-      console.log('subscripbing...')
+      app.io.emit('registration', 'subscribing user to selected plan')
       await StripeService.subscribe(newCustomer.id, pricing_plan)
 
-      console.log('starting registration...')
+      app.io.emit('registration', 'creating new user instance')
       await ['token', 'pricing_plan'].forEach(field => ctx.instance.unsetAttribute(field))
 
     } catch (err) {
-      console.log('cancelling registration...')
+      app.io.emit('registration', 'cancel registration')
       if (newCustomer) await StripeService.deleteCustomer(newCustomer.id)
       return Promise.reject(err)
     }
   })
 
   CustomUser.observe('after save', async function(ctx) {
-    console.log('registration completed...')
+    app.io.emit('registration', 'registration has successfully been completed')
   })
 }
